@@ -3,4 +3,5 @@ project(radixSort)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(radixSort main.cpp)
+add_executable(radixSort rsort.cpp main.cpp
+        rsort.h)

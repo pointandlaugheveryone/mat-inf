@@ -1,3 +1,4 @@
 *debug/
 .idea/
-
+*.so
+*.o
