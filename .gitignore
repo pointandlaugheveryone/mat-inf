@@ -1,0 +1,10 @@
+*__pycache__
+*data/
+*.vscode/
+*.idea/
+*debug/
+*.so
+*.o
+*env/
+*__pycache__*
+
