@@ -1,6 +1,5 @@
 import ctypes
 # ctypes should be valid as a "basic python module"
-# ...but i could rewrite it to lauch the c code as a subprocess (if you give me extra time to learn how)
 lib = ctypes.CDLL("./rsort.so")
 lib.find_min.argtypes = [
     ctypes.POINTER(ctypes.c_int),

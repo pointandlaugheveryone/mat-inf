@@ -1,6 +1,7 @@
 #include <iostream>
 #include "rsort.h"
 
+// this file exists only for testing the "library"
 int main() {
 
     int ar[10] = {1, 2, 12, 4, 32, 6, 75, 68, 9, 110};
