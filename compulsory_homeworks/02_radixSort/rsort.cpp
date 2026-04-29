@@ -20,7 +20,7 @@ extern "C" {
         return max;
     }
 
-    void radix_bin_sort(int* nums, const int n) { // msd-first, iterative version because im scared of recursion in c
+    void radix_bin_sort(int* nums, const int n) { // msd-first, no recursion
     std::vector<std::tuple<int,int,int>> stack;
     stack.reserve(n);
     stack.emplace_back(0, n, static_cast<int>(sizeof(int))*8 - 1);

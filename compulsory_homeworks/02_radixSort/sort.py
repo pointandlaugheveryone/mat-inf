@@ -18,7 +18,7 @@ lib.radix_bin_sort.argtypes = [
 lib.radix_bin_sort.restype = None
 
 
-def find_minimum(numbers) -> int:    # removed type annotations because ctypes wouldn't shut up about unexpected type even though it works ??
+def find_minimum(numbers) -> int:    # removed type annotations because ctypes wouldn't shut up about unexpected type even though it works
     n = len(numbers)
     ArrayType = ctypes.c_int * n
     c_num = ArrayType(*numbers)
