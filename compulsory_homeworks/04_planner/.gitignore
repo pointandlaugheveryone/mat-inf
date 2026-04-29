@@ -2,6 +2,7 @@
 .idea/
 *.so
 *.o
+*.h
 env/
 *__pycache__*
 cmake-build-debug/

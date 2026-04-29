@@ -1,7 +1,5 @@
 import numpy as np
 from typing import Tuple
-import ctypes
-
 
 class PathChecker:
     def __init__(self, grid: np.ndarray):
@@ -92,14 +90,15 @@ class PathChecker:
 
 
 if __name__ == "__main__":
-    # TODO: configure ctypes here
-    from mazes import maze_10x10_1
-    checker = PathChecker(maze_10x10_1)
+    from mazes import maze_20x20_1
+    from planner import Planner
+    p = Planner(maze_20x20_1)
+    checker = PathChecker(maze_20x20_1)
     start = np.array([0, 0])
-    goal = np.array([2, 1])
+    goal = np.array([18, 1])
 
     # Example bad path (collision / broken step etc.)
-    path = np.array([[0, 0], [0, 1], [1, 1], [0, 1], [1, 1], [2, 1]])
+    path = p.plan(start,goal)
 
     ok, report = checker.evaluate_path(path, start, goal)
     print(ok)
