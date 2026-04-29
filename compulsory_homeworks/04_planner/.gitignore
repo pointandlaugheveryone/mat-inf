@@ -1,6 +1,5 @@
 *debug/
 .idea/
-*.so
 *.o
 *.h
 env/
