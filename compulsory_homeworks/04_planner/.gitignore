@@ -1,6 +1,5 @@
 *debug/
 .idea/
-*.o
 *.h
 env/
 *__pycache__*

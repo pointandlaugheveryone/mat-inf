@@ -3,8 +3,6 @@
 *.vscode/
 *.idea/
 *debug/
-*.so
 *.o
 *env/
 *__pycache__*
-
