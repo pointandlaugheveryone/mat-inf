@@ -26,5 +26,5 @@ class StudentBot:
         c_board = np.ascontiguousarray(board).astype(np.int8,copy=False)
         outr = ctypes.c_int(-1)
         outc = ctypes.c_int(-1)
-        self.l.ChooseMove(c_board, r,c, player, win_length, ctypes.byref(outr), ctypes.byref(outc))
+        self.l.chooseMove(c_board, r,c, player, win_length, ctypes.byref(outr), ctypes.byref(outc))
         return int(outr.value), int(outc.value)

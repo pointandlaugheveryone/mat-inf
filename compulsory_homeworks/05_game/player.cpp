@@ -25,14 +25,13 @@ public:
         return empty;
     }
 
-    bool win(const bool myPlayer) const // checks if winLenth is reached in some direction
+    bool win(i8 setPlayer) const
     {
-        constexpr std::pair<int, int> directions[]
-        {
-            {0, 1}, {1, 0}, {1, 1}, {1, -1}, // horizon, vertical, downright, downleft
+        constexpr pair<int, int> directions[] = {
+            {0, 1}, {1, 0}, {1, 1}, {1, -1}
         };
 
-        for (const auto [dx, dy] : directions)
+        for (auto [dx, dy] : directions)
         {
             for (int r = 0; r < row; r++)
             {
@@ -41,10 +40,11 @@ public:
                     const int endrow = r + (winLength - 1) * dx;
                     const int endcol = c + (winLength - 1) * dy;
                     if (endrow < 0 || endrow >= row || endcol < 0 || endcol >= col) continue;
+
                     bool isWin = true;
                     for (int i = 0; i < winLength; i++)
                     {
-                        if (indexAt(r + i * dx, c + i * dy) != player)
+                        if (indexAt(r + i * dx, c + i * dy) != setPlayer)
                         {
                             isWin = false;
                             break;
@@ -57,42 +57,44 @@ public:
         return false;
     }
 
-
-    int minimaxABprune(const bool turn, int alpha, int beta, vii &free)
+    int minimaxABprune(bool turn, int alpha, int beta, const vii& free)
     {
-        if (win(true)) return 1;
-        if (win(false)) return -1;
-
-        const i8 me = player;
-        const i8 id = (player == 1) ? 2 : 1;
+        const i8 opponent = (player == 1) ? 2 : 1;
+        if (win(1)) return 1;
+        if (win(opponent)) return -1;
+        if (free.empty()) return 0;
         if (turn)
         {
             int best = INT_MIN;
-            for (auto [x, y] : free)
+            for (int i = 0; i < free.size(); i++)
             {
-                state[x * col + y] = me;
-                best = max(best, minimaxABprune(false, alpha, beta, free));
+                auto [x, y] = free[i];
+                state[x * col + y] = player;
+                vii next = free;
+                next.erase(next.begin() + i);
+                best = max(best,minimaxABprune(false, alpha, beta, next));
                 state[x * col + y] = 0;
 
-                alpha = max(alpha, best);
-                if (alpha>=beta) break;
+                if (max(alpha, best) >= beta) break;
             }
             return best;
         }
 
         int best = INT_MAX;
-        for (auto [x, y] : free)
+        for (int i = 0; i < free.size(); i++)
         {
-            state[x * col + y] = id;
-            best = min(best, minimaxABprune(true, alpha, beta, free));
+            auto [x, y] = free[i];
+            state[x * col + y] = opponent;
+            vii next = free;
+            next.erase(next.begin() + i);
+            best = min(best,minimaxABprune(true, alpha, beta, next));
             state[x * col + y] = 0;
 
-            beta = min(beta, best);
-            if (alpha>=beta) break;
+            if (alpha >= min(beta, best)) break;
         }
+
         return best;
     }
-
     Player(i8* s, const int r,const int c, const int id, const int len)
     {
         state = s;
